@@ -43,21 +43,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bài_01.cs" />
-    <Compile Include="Bài_02.cs" />
-    <Compile Include="Bài_03.cs" />
-    <Compile Include="Bài_04.cs" />
-    <Compile Include="Bài_05.cs" />
-    <Compile Include="Bài_06.cs" />
-    <Compile Include="Bài_07.cs" />
-    <Compile Include="Bài_08.cs" />
-    <Compile Include="Bài_09.cs" />
-    <Compile Include="Bài_10.cs" />
+    <Compile Include="Buoi2\Bài_01.cs" />
+    <Compile Include="Buoi3\Ex02.cs" />
+    <Compile Include="Buoi3\Ex01.cs" />
+    <Compile Include="Buoi2\Bài_02.cs" />
+    <Compile Include="Buoi2\Bài_03.cs" />
+    <Compile Include="Buoi2\Bài_04.cs" />
+    <Compile Include="Buoi2\Bài_05.cs" />
+    <Compile Include="Buoi2\Bài_06.cs" />
+    <Compile Include="Buoi2\Bài_07.cs" />
+    <Compile Include="Buoi2\Bài_08.cs" />
+    <Compile Include="Buoi2\Bài_09.cs" />
+    <Compile Include="Buoi2\Bài_10.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Buoi1\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
