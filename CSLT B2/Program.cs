@@ -11,7 +11,7 @@ namespace CSLT_B2
     {
         static void Main(string[] args)
         {
-           Ex02.Run();
+            Ex02.Bai2();
         }
     }
 }

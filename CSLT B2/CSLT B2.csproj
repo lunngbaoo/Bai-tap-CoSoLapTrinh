@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buoi1\BTBuoi1.cs" />
     <Compile Include="Buoi2\Bài_01.cs" />
     <Compile Include="Buoi3\Ex02.cs" />
     <Compile Include="Buoi3\Ex01.cs" />
@@ -61,8 +62,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Buoi1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
