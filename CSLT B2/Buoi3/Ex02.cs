@@ -74,16 +74,16 @@ namespace CSLT_B2.Buoi3
                 TongThanhToan.ToString("#,##0") + " VNĐ");
             Console.ReadKey();
         }
-            public static void Bai2()
-        { 
+        public static void Bai2()
+        {
             // Ex2: Hệ thống BMI
             Console.WriteLine("Bài 2");
             Console.OutputEncoding = Encoding.UTF8;
             Console.WriteLine("Nhập chiều cao:");
-            double chieuCao  = double.Parse(Console.ReadLine());
+            double chieuCao = double.Parse(Console.ReadLine());
             Console.WriteLine("Nhập cân nặng:");
             double canNang = double.Parse(Console.ReadLine());
-            double BMI = Math.Round(canNang / (chieuCao * chieuCao),2);
+            double BMI = Math.Round(canNang / (chieuCao * chieuCao), 2);
             Console.WriteLine("Chỉ số BMI của bạn:" + BMI);
             if (BMI < 18.5)
             {
@@ -101,19 +101,20 @@ namespace CSLT_B2.Buoi3
             {
                 Console.WriteLine("Béo phì");
             }
-            double canNangToiThieu = Math.Round (18.5 * chieuCao * chieuCao,2);
-            double canNangToiDa = Math.Round (22.9 * chieuCao * chieuCao,2);
+            double canNangToiThieu = Math.Round(18.5 * chieuCao * chieuCao, 2);
+            double canNangToiDa = Math.Round(22.9 * chieuCao * chieuCao, 2);
             Console.WriteLine("Cân nặng lý tưởng của bạn nên từ " + canNangToiThieu + "kg" + " đến " + canNangToiDa + "kg");
             Console.ReadKey();
         }
 
-    }
 
-    public static void Bai3()
+
+        public static void Bai3()
         { //Ex3: Đổi tiền tệ
             Console.WriteLine("Bài 2");
             Console.OutputEncoding = Encoding.UTF8;
 
 
         }
+    }
 }

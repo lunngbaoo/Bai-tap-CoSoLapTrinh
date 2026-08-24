@@ -1,4 +1,5 @@
 ﻿using CSLT_B2.Buoi3;
+using CSLT_B2.Buoi4;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace CSLT_B2
     {
         static void Main(string[] args)
         {
-            Ex02.Bai2();
+            BTBuoi4.giaiPTBac2();
         }
     }
 }
