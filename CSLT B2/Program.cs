@@ -12,7 +12,7 @@ namespace CSLT_B2
     {
         static void Main(string[] args)
         {
-            BTBuoi4.giaiPTBac2();
+            Ex02.Bai7();
         }
     }
 }
