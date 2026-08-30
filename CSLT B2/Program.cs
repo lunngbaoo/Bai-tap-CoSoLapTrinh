@@ -12,7 +12,7 @@ namespace CSLT_B2
     {
         static void Main(string[] args)
         {
-            Ex02.Bai7();
+            BTVN_3.Bai5();
         }
     }
 }
