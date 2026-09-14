@@ -1,6 +1,7 @@
 ﻿using CSLT_B2.Buoi3;
 using CSLT_B2.Buoi4;
 using CSLT_B2.Buoi5;
+using CSLT_B2.Buoi6;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace CSLT_B2
     {
         static void Main(string[] args)
         {
-            BTBuoi5.Bai7();
+            BTBuoi6.Bai6();
         }
     }
 }
