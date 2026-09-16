@@ -14,7 +14,7 @@ namespace CSLT_B2
     {
         static void Main(string[] args)
         {
-            BTBuoi6.Bai6();
+            BTVNBuoi6.Bai1();
         }
     }
 }

@@ -349,6 +349,375 @@ namespace CSLT_B2.Buoi3
             Console.WriteLine($"Chi phí mỗi người: {costPerPerson:N0} VNĐ");
             Console.ReadKey();
         }
+
+        public static void Bai8()
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            string correctOtp = "839201";
+            DateTime creationTime = DateTime.Now;
+
+            Console.Write("Mã OTP nhận được: ");
+            string inputOtp = Console.ReadLine()?.Trim();
+
+            Console.Write("Thời gian trôi qua: ");
+            string timeInput = Console.ReadLine();
+
+            int secondsPassed = 135;
+            int.TryParse(timeInput, out secondsPassed);
+
+            bool isValidFormat = inputOtp != null && inputOtp.Length == 6 && int.TryParse(inputOtp, out _);
+
+            bool isCorrectCode = inputOtp == correctOtp;
+
+            bool isNotExpired = secondsPassed <= 300;
+
+            Console.WriteLine("\nOUTPUT:");
+            if (!isValidFormat)
+            {
+                Console.WriteLine("Trạng thái xác thực: THẤT BẠI");
+                Console.WriteLine("Lỗi: Định dạng OTP không hợp lệ (phải gồm đúng 6 chữ số).");
+            }
+            else if (!isNotExpired)
+            {
+                Console.WriteLine("Trạng thái xác thực: THẤT BẠI");
+                Console.WriteLine("Lỗi: Mã OTP đã hết hiệu lực (quá 5 phút).");
+            }
+            else if (!isCorrectCode)
+            {
+                Console.WriteLine("Trạng thái xác thực: THẤT BẠI");
+                Console.WriteLine("Lỗi: Mã OTP không chính xác.");
+            }
+            else
+            {
+                Console.WriteLine("Trạng thái xác thực: THÀNH CÔNG");
+                Console.WriteLine("Giao dịch đã được phê duyệt.");
+            }
+            Console.ReadKey();
+        }
+        
+        public static void Bai9()
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            Console.Write("Lương Gross (VNĐ): ");
+            decimal gross = decimal.Parse(Console.ReadLine());
+
+            Console.Write("Số người phụ thuộc: ");
+            int dependents = int.Parse(Console.ReadLine());
+
+            decimal insurance = gross * 0.105m;
+
+            decimal selfDeduction = 11000000m;
+            decimal dependentDeduction = dependents * 4400000m;
+
+            decimal taxableIncome = gross - insurance - selfDeduction - dependentDeduction;
+            if (taxableIncome < 0) taxableIncome = 0;
+
+            decimal pit = 0m;
+            if (taxableIncome > 0)
+            {
+                if (taxableIncome <= 5000000m) pit = taxableIncome * 0.05m;
+                else if (taxableIncome <= 10000000m) pit = taxableIncome * 0.10m - 250000m;
+                else if (taxableIncome <= 18000000m) pit = taxableIncome * 0.15m - 750000m;
+                else if (taxableIncome <= 32000000m) pit = taxableIncome * 0.20m - 1650000m;
+                else if (taxableIncome <= 52000000m) pit = taxableIncome * 0.25m - 3250000m;
+                else if (taxableIncome <= 80000000m) pit = taxableIncome * 0.30m - 5850000m;
+                else pit = taxableIncome * 0.35m - 9850000m;
+            }
+
+            decimal net = gross - insurance - pit;
+
+            Console.WriteLine($"\nGiảm trừ Bảo hiểm (10.5%): {insurance:N0} VNĐ");
+            Console.WriteLine($"Thu nhập chịu thuế: {taxableIncome:N0} VNĐ");
+            Console.WriteLine($"Thuế TNCN phải nộp: {pit:N0} VNĐ");
+            Console.WriteLine($"LƯƠNG NET THỰC NHẬN: {net:N0} VNĐ");
+            Console.ReadKey();
+        }
+
+        enum StockStatus
+        {
+            OutOfStock,
+            LowStock,
+            InStock,
+            Discontinued
+        }
+        public static void Bai10()
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            string productId = "KB-09";
+            string productName = "Bàn phím Cơ Akko";
+            int? quantity = null;
+            int minThreshold = 10;
+            DateTime? restockDate = null;
+
+            int displayQuantity = quantity ?? 0;
+
+            StockStatus status;
+            if (quantity == null || quantity == 0)
+            {
+                status = StockStatus.OutOfStock;
+            }
+            else if (quantity < minThreshold)
+            {
+                status = StockStatus.LowStock;
+            }
+            else
+            {
+                status = StockStatus.InStock;
+            }
+
+            string restockText = restockDate?.ToString("dd/MM/yyyy") ?? "Chưa có lịch nhập";
+
+            Console.WriteLine($"Sản phẩm: {productName} (Mã: {productId})");
+            Console.WriteLine($"Số lượng tồn kho: {(quantity.HasValue ? quantity.Value.ToString() : "null (Chưa kiểm kê)")}");
+            Console.WriteLine($"Restock Date: {(restockDate.HasValue ? restockDate.Value.ToString("dd/MM/yyyy") : "null")}");
+            Console.WriteLine("\nOUTPUT:");
+            Console.WriteLine($"Số lượng hiển thị: {displayQuantity} {(quantity == null ? "(Cảnh báo: Dữ liệu trống)" : "")}");
+            Console.WriteLine($"Trạng thái kho: {status} (Hết hàng)");
+            Console.WriteLine($"Dự kiến nhập hàng: {restockText}");
+            Console.ReadKey();
+        }
+        public static void Bai11()
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            Console.Write("Số tiền gửi (VNĐ): ");
+            decimal P = decimal.Parse(Console.ReadLine());
+            Console.Write("Lãi suất năm (%): ");
+            double r = double.Parse(Console.ReadLine());
+            Console.Write("Thời gian gửi (tháng): ");
+            int n = int.Parse(Console.ReadLine());
+
+
+            decimal simpleInterest = P * (decimal)(r / 100.0) * (n / 12.0m);
+
+            double pDouble = (double)P;
+            double compoundAmountDouble = pDouble * Math.Pow(1.0 + (r / 100.0) / 12.0, n);
+            decimal compoundInterest = (decimal)compoundAmountDouble - P;
+
+            decimal diff = compoundInterest - simpleInterest;
+
+            Console.WriteLine($"\nTổng tiền lãi (Lãi đơn): {simpleInterest:N0} VNĐ");
+            Console.WriteLine($"Tổng tiền lãi (Lãi kép): {compoundInterest:N0} VNĐ");
+            Console.WriteLine($"Lợi nhuận chênh lệch: {diff:N0} VNĐ (Lãi kép tối ưu hơn)");
+            Console.ReadKey();
+        }
+        public static void Bai12()
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            Console.Write("Văn bản gốc: ");
+            string rawText = Console.ReadLine();
+            Console.Write("Khóa dịch chuyển (k): ");
+            int k = int.Parse(Console.ReadLine());
+
+            string encrypted = CaesarShift(rawText, k);
+            string decrypted = CaesarShift(encrypted, -k);
+
+            Console.WriteLine($"\nVăn bản Mã hóa: {encrypted}");
+            Console.WriteLine($"Văn bản Giải mã: {decrypted}");
+        }
+
+        private static string CaesarShift(string text, int shift)
+        {
+            char[] buffer = text.ToCharArray();
+            for (int i = 0; i < buffer.Length; i++)
+            {
+                char c = buffer[i];
+                if (char.IsUpper(c))
+                {
+                    int offset = (c - 'A' + shift) % 26;
+                    if (offset < 0) offset += 26;
+                    buffer[i] = (char)('A' + offset);
+                }
+                else if (char.IsLower(c))
+                {
+                    int offset = (c - 'a' + shift) % 26;
+                    if (offset < 0) offset += 26;
+                    buffer[i] = (char)('a' + offset);
+                }
+            }
+            return new string(buffer);
+        }
+        enum VehicleType { Motorbike, Car, Truck }
+        public static void Bai13()
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            Console.Write("Loại xe (0-Motorbike, 1-Car, 2-Truck): ");
+            VehicleType type = (VehicleType)int.Parse(Console.ReadLine());
+
+            Console.Write("Giờ vào (yyyy-MM-dd HH:mm): ");
+            DateTime checkIn = DateTime.Parse(Console.ReadLine());
+
+            Console.Write("Giờ ra (yyyy-MM-dd HH:mm): ");
+            DateTime checkOut = DateTime.Parse(Console.ReadLine());
+
+            double totalHours = (checkOut - checkIn).TotalHours;
+            int billedHours = (int)Math.Ceiling(totalHours);
+
+            decimal first2HoursFee = 0m;
+            decimal nextHourRate = 0m;
+
+            switch (type)
+            {
+                case VehicleType.Motorbike:
+                    first2HoursFee = 5000m;
+                    nextHourRate = 2000m;
+                    break;
+                case VehicleType.Car:
+                    first2HoursFee = 20000m;
+                    nextHourRate = 10000m;
+                    break;
+                case VehicleType.Truck:
+                    first2HoursFee = 50000m;
+                    nextHourRate = 25000m;
+                    break;
+            }
+
+            decimal parkingFee = first2HoursFee;
+            decimal extraFee = 0m;
+
+            if (billedHours > 2)
+            {
+                extraFee = (billedHours - 2) * nextHourRate;
+                parkingFee += extraFee;
+            }
+
+            decimal overnightFee = 0m;
+            if (checkOut.Date > checkIn.Date)
+            {
+                overnightFee = 30000m;
+            }
+
+            decimal totalPayment = parkingFee + overnightFee;
+
+            Console.WriteLine($"\nTổng thời gian đỗ: {totalHours:F2} giờ -> Tính phí: {billedHours} giờ");
+            Console.WriteLine($"Phí 2 giờ đầu: {first2HoursFee:N0} VNĐ");
+            if (billedHours > 2)
+            {
+                Console.WriteLine($"Phí {billedHours - 2} giờ tiếp theo: {extraFee:N0} VNĐ ({nextHourRate:N0} x {billedHours - 2})");
+            }
+            if (overnightFee > 0)
+            {
+                Console.WriteLine($"Phụ phí qua đêm: {overnightFee:N0} VNĐ");
+            }
+            Console.WriteLine($"TỔNG PHÍ ĐỖ XE: {totalPayment:N0} VNĐ");
+        }
+
+        public static void Bai14()
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            Console.Write("Nhập chuỗi số: ");
+            string input = Console.ReadLine();
+
+            if (int.TryParse(input, out int num))
+            {
+                Console.WriteLine($"Kiểm tra Parse: Thành công! Giá trị int = {num}");
+
+                bool fitsByte = num >= byte.MinValue && num <= byte.MaxValue;
+                Console.WriteLine($"Phù hợp kiểu byte: {(fitsByte ? "CÓ (Vừa vặn trong dải 0-255)" : "KHÔNG")}");
+
+                int sumDigits = 0;
+                int temp = Math.Abs(num);
+                while (temp > 0)
+                {
+                    sumDigits += temp % 10;
+                    temp /= 10;
+                }
+                Console.WriteLine($"Tổng các chữ số: {sumDigits}");
+
+                try
+                {
+                    checked
+                    {
+                        int overflowTest = num * 10000000; 
+                        Console.WriteLine("Kiểm tra Tràn số: An toàn trong phạm vi int32.");
+                    }
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine("Kiểm tra Tràn số: Phát hiện ngoại lệ OverflowException (Tràn số trong khối checked)!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Lỗi: Chuỗi nhập vào không phải là số nguyên hợp lệ!");
+            }
+        }
+        enum CustomerType { Child, Student, Adult, Senior }
+        public static void Bai15()
+        {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            decimal basePrice = 100000m;
+
+            // Nhập loại khách hàng
+            Console.Write("Khách hàng (Child/Student/Adult/Senior): ");
+            CustomerType customerType = (CustomerType)Enum.Parse(typeof(CustomerType), Console.ReadLine(), true);
+
+            // Nhập thẻ sinh viên
+            Console.Write("Thẻ SV hợp lệ (True/False): ");
+            bool hasStudentCard = bool.Parse(Console.ReadLine());
+
+            // Nhập ngày xem phim
+            Console.Write("Ngày xem (Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday): ");
+            DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), Console.ReadLine(), true);
+
+            decimal discount = 0;
+            decimal weekendSurcharge = 0;
+
+            // Tính giảm giá
+            if (customerType == CustomerType.Child)
+            {
+                discount = basePrice * 0.50m;
+            }
+            else if (customerType == CustomerType.Senior)
+            {
+                discount = basePrice * 0.50m;
+            }
+            else if (customerType == CustomerType.Student && hasStudentCard)
+            {
+                // Sinh viên được giảm 30% từ Thứ 2 đến Thứ 5
+                if (day == DayOfWeek.Monday ||
+                    day == DayOfWeek.Tuesday ||
+                    day == DayOfWeek.Wednesday ||
+                    day == DayOfWeek.Thursday)
+                {
+                    discount = basePrice * 0.30m;
+                }
+            }
+            else if (customerType == CustomerType.Adult &&
+                     day == DayOfWeek.Wednesday)
+            {
+                // Thứ 4 Vui Vẻ dành cho Adult
+                discount = basePrice * 0.20m;
+            }
+
+            // Tính phụ thu cuối tuần
+            if (day == DayOfWeek.Friday ||
+                day == DayOfWeek.Saturday ||
+                day == DayOfWeek.Sunday)
+            {
+                weekendSurcharge = 20000m;
+            }
+
+            // Tính giá cuối cùng
+            decimal finalPrice = basePrice - discount + weekendSurcharge;
+
+            // In vé
+            Console.WriteLine("\n========== VÉ XEM PHIM ==========");
+            Console.WriteLine($"Khách hàng: {customerType}");
+            Console.WriteLine($"Ngày xem: {day}");
+            Console.WriteLine($"Giá vé gốc: {basePrice:N0} VNĐ");
+            Console.WriteLine($"Khoản giảm giá: -{discount:N0} VNĐ");
+            Console.WriteLine($"Phụ thu cuối tuần: +{weekendSurcharge:N0} VNĐ");
+            Console.WriteLine($"TỔNG TIỀN VÉ: {finalPrice:N0} VNĐ");
+            Console.WriteLine("=================================");
+        }
     }
 }
 
