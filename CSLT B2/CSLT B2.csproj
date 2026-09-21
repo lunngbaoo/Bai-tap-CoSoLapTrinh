@@ -61,6 +61,7 @@
     <Compile Include="Buoi5\BTBuoi5.cs" />
     <Compile Include="Buoi6\BTBuoi6.cs" />
     <Compile Include="Buoi6\BTVNBuoi6.cs" />
+    <Compile Include="Buoi7\BTBuoi7.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
